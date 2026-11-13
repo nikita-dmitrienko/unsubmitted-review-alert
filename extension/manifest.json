@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Unsubmitted Review Alert for GitHub",
+  "version": "0.2.0",
+  "description": "Never forget to submit a GitHub pull request review: warns you while your review comments are still pending and invisible to others.",
+  "minimum_chrome_version": "102",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

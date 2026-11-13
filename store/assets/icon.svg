@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- 96x96 artwork inside 16px transparent padding, per Chrome Web Store icon guidance -->
+  <path d="M30 18h68a14 14 0 0 1 14 14v46a14 14 0 0 1-14 14H62l-22 18V92H30a14 14 0 0 1-14-14V32a14 14 0 0 1 14-14z" fill="#d1242f"/>
+  <rect x="58" y="30" width="12" height="34" rx="6" fill="#fff"/>
+  <circle cx="64" cy="77" r="7" fill="#fff"/>
+</svg>
