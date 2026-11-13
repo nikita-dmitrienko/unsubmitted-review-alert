@@ -1,5 +1,7 @@
 # Unsubmitted Review Alert for GitHub
 
+![Opening a pull request with a pending review shows the reminder bar; Finish review opens GitHub's review box](store/assets/screenshots/demo.gif)
+
 A Chrome extension (Manifest V3, no permissions besides a content script on github.com) that
 notices when you have started a GitHub pull request review but not submitted it, and then:
 
@@ -10,8 +12,8 @@ notices when you have started a GitHub pull request review but not submitted it,
 - asks before you leave the PR: links, GitHub's keyboard shortcuts and Back inside GitHub get an in-page question;
   closing the tab, reloading, typing another address and links to other sites get Chrome's "Leave site?" dialog.
 
-The bar uses GitHub's own theme colors (light, dark, dimmed, high contrast, colorblind, sync with system) and
-meets WCAG AA contrast in each. For screen readers it is a named landmark ("Unsubmitted review") with a polite
+The bar uses GitHub's own theme colors, so it follows your GitHub theme; it meets WCAG AA contrast in the
+light, dark, both high-contrast and sync-with-system themes (checked on real github.com). For screen readers it is a named landmark ("Unsubmitted review") with a polite
 status message; it works with the keyboard and in Windows contrast themes.
 
 No token, no network requests, no storage.
