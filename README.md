@@ -18,11 +18,13 @@ It runs only on github.com and asks for no other access. It makes no network req
 
 ## Install
 
-Not in the Chrome Web Store yet. To try it now:
+[Get it from the Chrome Web Store](https://chromewebstore.google.com/detail/unsubmitted-review-alert/mgoijcgmbnhaejfkdcjliiohaiengfbh).
 
-1. Download or clone this repository.
-2. Open `chrome://extensions` and turn on Developer mode.
-3. Click "Load unpacked" and pick the `extension` folder.
+If you use Chrome's Enhanced protection, Chrome may say the extension "is not trusted by Enhanced Safe Browsing".
+Chrome shows that for extensions from new publishers, usually for the first few months
+([Google's explanation](https://support.google.com/chrome_webstore/answer/2664769)). The code is all here if you want to check it.
+
+To run it from source instead, open `chrome://extensions`, turn on Developer mode, click "Load unpacked" and pick the `extension` folder.
 
 ## Develop
 
