@@ -649,6 +649,43 @@ async function test(name, fn) {
     assert.deepEqual(dialogs, ['confirm']);
     await tab.waitForFunction((p) => !document.title.includes(p), PREFIX, { timeout: 3000 });
   });
+  await test('Back twice: the first asks and Cancel stays; the second leaves without asking and clears the nag', async () => {
+    await open('/octo/repo/pulls');
+    await tab.waitForTimeout(500);
+    await tab.click('#soft');
+    await waitForState(tab, true);
+    await tab.mouse.click(5, 5);
+    dialogs.length = 0;
+    await tab.goBack({ timeout: 1500 }).catch(() => {});
+    await tab.waitForTimeout(300);
+    assert.deepEqual(dialogs, ['confirm']);
+    assert.equal(pathnameNow(), '/octo/repo/pull/1');
+    // No click in between: cancelling the first Back used up the page's activation, so this one can't be cancelled.
+    await tab.goBack({ timeout: 1500 }).catch(() => {});
+    await tab.waitForURL('**/octo/repo/pulls');
+    await waitForState(tab, false);
+    assert.deepEqual(dialogs, ['confirm']);
+    assert.equal((await tab.title()).startsWith(PREFIX), false);
+  });
+  await test('after leaving, coming back to the PR (Forward) brings the nag back', async () => {
+    await open('/octo/repo/pulls');
+    await tab.waitForTimeout(500);
+    await tab.click('#soft');
+    await waitForState(tab, true);
+    await tab.mouse.click(5, 5);
+    dialogAnswer = true;
+    await tab.goBack({ timeout: 1500 }).catch(() => {});
+    await tab.waitForURL('**/octo/repo/pulls');
+    dialogAnswer = false;
+    await waitForState(tab, false);
+    dialogs.length = 0;
+    await tab.goForward({ timeout: 1500 }).catch(() => {});
+    await tab.waitForURL('**/octo/repo/pull/1');
+    await waitForState(tab, true);
+    assert.match(await bannerText(tab), /4 pending comments/);
+    assert.ok((await tab.title()).startsWith(PREFIX));
+    assert.deepEqual(dialogs, []);
+  });
   await test('Back inside the same PR (tab to tab) does not ask', async () => {
     await open('/octo/repo/pull/1');
     await waitForState(tab, true);

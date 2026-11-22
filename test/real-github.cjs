@@ -194,6 +194,19 @@ async function test(name, fn) {
     assert.equal(await showsPr(), false, `view still shows a PR: ${await tab.title()}`);
     assert.equal(await bannerShown(), false);
   });
+  await test('Back twice: Cancel on the first; the second (no new click) leaves without asking, URL and view agree', async () => {
+    const prUrl = await enterPrInApp();
+    await tab.goBack({ timeout: 3000 }).catch(() => {});
+    await tab.waitForTimeout(1500);
+    assert.deepEqual(dialogs, ['confirm']);
+    assert.equal(tab.url(), prUrl);
+    await tab.goBack({ timeout: 3000 }).catch(() => {});
+    await tab.waitForURL('**/refined-github/sandbox/pulls', { timeout: 10000 });
+    await tab.waitForTimeout(1500);
+    assert.deepEqual(dialogs, ['confirm']);
+    assert.equal(await showsPr(), false, `view still shows a PR: ${await tab.title()}`);
+    assert.equal(await bannerShown(), false);
+  });
 
   console.log('Theme on real GitHub pages (GitHub\'s own Primer CSS)');
   for (const [label, mode, light, dark, scheme] of [
